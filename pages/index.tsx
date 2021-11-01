@@ -28,13 +28,12 @@ const Home: NextPage = () => {
       </main>
 
       <footer className={styles.footer}>
-        Code with love by{" "}
         <a
           href="https://github.com/aldhanekaa"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Aldhanekaa
+          Code with love by Aldhanekaa
         </a>
       </footer>
     </Container>
