@@ -1,0 +1,36 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["plugin:react/recommended", "next", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "@next/next"],
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx", ".tsx"] }
+    ],
+    "react/jsx-props-no-spreading": [
+      1,
+      {
+        "html": "ignore",
+        "explicitSpread": "ignore"
+      }
+    ],
+    "import/extensions": [1, "never"],
+    "no-use-before-define": "off",
+    "react/require-default-props": [
+      1,
+      { "forbidDefaultForRequired": true, "ignoreFunctionalComponents": true }
+    ],
+    "react/forbid-prop-types": [1]
+  }
+}
