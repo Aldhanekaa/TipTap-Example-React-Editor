@@ -11,18 +11,8 @@ const NodeViewWrapperStyled = styled(NodeViewWrapper)`
     top: 0.5rem;
   }
 `;
-/*
-{
-  node: {
-    attrs: { language: defaultLanguage },
-  },
-  updateAttributes,
-  extension,
-} 
-*/
 
 export default function CodeBlockComponent(props) {
-  console.log(props.extension, props);
   return (
     <NodeViewWrapperStyled className="code-block">
       <select

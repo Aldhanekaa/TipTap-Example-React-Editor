@@ -5,7 +5,6 @@ import { Editor } from "@tiptap/react";
 import LinkIcon from "@mui/icons-material/Link";
 import ImageIcon from "@mui/icons-material/Image";
 
-import { styled } from "@mui/material/styles";
 import UndoIcon from "@mui/icons-material/Undo";
 import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
 import FormatAlignCenterIcon from "@mui/icons-material/FormatAlignCenter";
@@ -32,27 +31,14 @@ import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import Paper from "@mui/material/Paper";
 
 import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { Typography, Divider } from "@mui/material";
 
 import PickImage from "../renderers/ImageRenderer";
 import PickVideo from "../renderers/VideoRenderer";
 
-const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
-  "& .MuiToggleButtonGroup-grouped": {
-    margin: theme.spacing(0.5),
-    border: 0,
-    "&.Mui-disabled": {
-      border: 0,
-    },
-    "&:not(:first-of-type)": {
-      borderRadius: theme.shape.borderRadius,
-    },
-    "&:first-of-type": {
-      borderRadius: theme.shape.borderRadius,
-    },
-  },
-}));
+import StyledToggleButtonGroup from "components/content/StyledToggleButtonGroup";
+
+import HeadingToolbarButtons from "components/content/toolbars/HeadingToolbarButtons";
 
 const ProjectCreateContentToolbar = ({ editor }: { editor: Editor }) => {
   const [OpenPickImage, setOpenPickImage] = React.useState(false);
@@ -74,72 +60,7 @@ const ProjectCreateContentToolbar = ({ editor }: { editor: Editor }) => {
             mb: 2,
           }}
         >
-          <StyledToggleButtonGroup
-            size="small"
-            exclusive
-            aria-label="text alignment"
-          >
-            <ToggleButton
-              value="h1"
-              aria-label="H1 Text"
-              onClick={() =>
-                editor.chain().focus().toggleHeading({ level: 1 }).run()
-              }
-              selected={editor.isActive("heading", { level: 1 })}
-            >
-              <Typography fontWeight={900}>H1</Typography>
-            </ToggleButton>
-            <ToggleButton
-              onClick={() =>
-                editor.chain().focus().toggleHeading({ level: 2 }).run()
-              }
-              selected={editor.isActive("heading", { level: 2 })}
-              value="h2"
-              aria-label="H2 Text"
-            >
-              <Typography fontWeight={800}>H2</Typography>
-            </ToggleButton>
-            <ToggleButton
-              onClick={() =>
-                editor.chain().focus().toggleHeading({ level: 3 }).run()
-              }
-              selected={editor.isActive("heading", { level: 3 })}
-              value="h3"
-              aria-label="H3 Text"
-            >
-              <Typography fontWeight={800}>H3</Typography>
-            </ToggleButton>
-            <ToggleButton
-              onClick={() =>
-                editor.chain().focus().toggleHeading({ level: 4 }).run()
-              }
-              selected={editor.isActive("heading", { level: 4 })}
-              value="h4"
-              aria-label="H4 Text"
-            >
-              <Typography fontWeight={700}>H4</Typography>
-            </ToggleButton>
-            <ToggleButton
-              onClick={() =>
-                editor.chain().focus().toggleHeading({ level: 5 }).run()
-              }
-              selected={editor.isActive("heading", { level: 5 })}
-              value="h5"
-              aria-label="H5 Text"
-            >
-              <Typography fontWeight={600}>H5</Typography>
-            </ToggleButton>
-            <ToggleButton
-              onClick={() =>
-                editor.chain().focus().toggleHeading({ level: 6 }).run()
-              }
-              selected={editor.isActive("heading", { level: 6 })}
-              value="h6"
-              aria-label="H6 Text"
-            >
-              <Typography fontWeight={500}>H6</Typography>
-            </ToggleButton>
-          </StyledToggleButtonGroup>
+          <HeadingToolbarButtons editor={editor} />
           <Divider flexItem orientation="vertical" sx={{ mx: 0.5, my: 1 }} />
           <StyledToggleButtonGroup
             size="small"
@@ -312,13 +233,8 @@ const ProjectCreateContentToolbar = ({ editor }: { editor: Editor }) => {
             <PickVideo
               open={OpenPickVideo}
               handleClose={() => setOpenPickVideo(false)}
-              setThumbnail={(value: { src: string; alt?: string }) => {
-                editor
-                  .chain()
-                  .focus()
-                  // @ts-ignore
-                  .setVideo({ src: value.src, alt: value.alt })
-                  .run();
+              setThumbnail={(value: { src: string }) => {
+                editor.chain().focus().setVideo({ src: value.src }).run();
               }}
             />
             <ToggleButton

@@ -2,7 +2,7 @@ import { Node, mergeAttributes, CommandProps } from "@tiptap/core";
 import { ReactNodeViewRenderer } from "@tiptap/react";
 import Component from "./Component";
 
-interface optionsI {
+export interface optionsI {
   src: string;
   subtitles?: Array<{ label: string; srcLang: string; src: string }>;
   poster?: string;
